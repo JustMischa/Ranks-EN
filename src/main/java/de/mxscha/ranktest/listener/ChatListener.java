@@ -1,7 +1,6 @@
 package de.mxscha.ranktest.listener;
 
 import de.mxscha.ranktest.utils.DefaultScoreboard;
-import de.mxscha.ranktest.utils.PlayerTablist;
 import de.mxscha.ranktest.utils.extras.Ranks;
 import de.mxscha.ranktest.utils.extras.items.JobToolItem;
 import io.papermc.paper.event.player.AsyncChatEvent;
@@ -10,13 +9,13 @@ import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.regex.Matcher;
@@ -51,37 +50,37 @@ public class ChatListener implements Listener {
 
                 // ping a player chat System
 
-                String msgString = "Test @Mxscha Test";
+                // play the player a sound
+                String msgString = PlainTextComponentSerializer.plainText().serialize(finalMsg);
+
+                TextReplacementConfig.Builder chatMessage = TextReplacementConfig.builder();
+
+
                 // Pattern = Woran wir suchen
                 Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]*");
 
                 Matcher matcher = pattern.matcher(msgString);
                 while (matcher.find()) {
-                    String aktuellerMatch = matcher.group();
-                    player.sendMessage(aktuellerMatch);
-                }
+                    String currentMatch = matcher.group();
+                    String currentPlayer = currentMatch.substring(1);
 
-                /*if (finalMsg.contains() {
-                    player.sendMessage("test");
-                }*/
+                    // replace the player name with the ping
+                    chatMessage.match(currentMatch);
+                    chatMessage.replacement(Component.text(currentMatch).color(TextColor.fromHexString("#FB4EE9")).decorate(TextDecoration.ITALIC));
 
-                /*
-                 for (Player all : Bukkit.getOnlinePlayers()) {
-                    TextReplacementConfig.Builder builder = TextReplacementConfig.builder();
-                    builder.match(all.getName());
-                    builder.replacement(Component.text("§l@" + all.getName()).color(TextColor.fromHexString("#FB4EE9")).decorate(TextDecoration.ITALIC));
+                    // ping the other player
+                    Bukkit.getOnlinePlayers().forEach(all -> {
+                        if (all.getName().equalsIgnoreCase(currentPlayer)) {
+                            all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 1);
+                        }
 
-                    // Hier ist bei dem Component der Player Abgeändert
-                    Component coloredName = finalMsg.replaceText(builder.build());
-
-                    if (all != player) {
+                        // Hier wird die Nachricht an den Spieler gesendet
                         all.sendMessage(ranks.getPrefixForChat()
                                 .append(name)
                                 .append(Component.text("§8: "))
-                                .append(coloredName));
-                    }
+                                .append(finalMsg.replaceText(chatMessage.build())));
+                    });
                 }
-                 */
             }
         }
 
