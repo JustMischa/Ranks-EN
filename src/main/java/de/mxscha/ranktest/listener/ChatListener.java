@@ -47,12 +47,15 @@ public class ChatListener implements Listener {
                 Component name = Component.text(player.getName()).color(NamedTextColor.GRAY).decoration(TextDecoration.BOLD, false);
 
                 // ping a player chat System
+
+                String msgString = "Test @Mxscha Test";
                 // Pattern = Woran wir suchen
                 Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]*");
 
-                Matcher matcher = pattern.matcher("Test @Mxscha Test");
-                for(int i = 0; i < matcher.groupCount(); i++) {
-                    player.sendMessage(matcher.group(i));
+                Matcher matcher = pattern.matcher(msgString);
+                while (matcher.find()) {
+                    String aktuellerMatch = matcher.group();
+                    player.sendMessage(aktuellerMatch);
                 }
 
                 /*if (finalMsg.contains() {
