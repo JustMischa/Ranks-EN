@@ -9,12 +9,16 @@ import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ChatListener implements Listener {
 
@@ -43,9 +47,17 @@ public class ChatListener implements Listener {
                 Component name = Component.text(player.getName()).color(NamedTextColor.GRAY).decoration(TextDecoration.BOLD, false);
 
                 // ping a player chat System
-                if (finalMsg.contains() {
-                    player.sendMessage("test");
+                // Pattern = Woran wir suchen
+                Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]");
+
+                Matcher matcher = pattern.matcher("Test @Mxscha Test");
+                for(int i = 0; i < matcher.groupCount(); i++) {
+                    player.sendMessage(matcher.group(i));
                 }
+
+                /*if (finalMsg.contains() {
+                    player.sendMessage("test");
+                }*/
 
                 /*
                  for (Player all : Bukkit.getOnlinePlayers()) {
