@@ -6,18 +6,17 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.md_5.bungee.api.ChatColor;
 
+/**
+       Rank Class coded for EnderNation
+       Made by: Mxscha (+KeksGauner)
+
+       How to add a rank:
+           TEST_RANK("[Prefix], NamedTextColor.[WantedColor], "[permission]");
+
+       How to add a rank with 2 colors:
+           TEST_RANK("[Prefix1]","[Prefix2], NamedTextColor.[ColorForPrefix2], NamedTextColor.[ColorForPrefix1], "[permission]");
+*/
 public enum Ranks {
-
-    /*
-        Rank Class coded for EnderNation
-        Made by: Mxscha (+KeksGauner)
-
-        How to add a rank:
-            TEST_RANK("[Prefix], NamedTextColor.[WantedColor], "[permission]");
-
-        How to add a rank with 2 colors:
-            TEST_RANK("[Prefix1]","[Prefix2], NamedTextColor.[ColorForPrefix2], NamedTextColor.[ColorForPrefix1], "[permission]");
-     */
 
     OWNER("Owner", NamedTextColor.DARK_RED, "rang.owner"),
     MANAGER("Manger", NamedTextColor.RED, "rang.manager"),
@@ -56,17 +55,16 @@ public enum Ranks {
         secondColor = null;
         prePrefix = null;
     }
-    
+
 
     public String getPrefix() {
         if (secondColor == null || prePrefix == null) {
-            return  ChatColor.of(color.asHexString()) + "§l" + prefix;
+            return ChatColor.of(color.asHexString()) + "§l" + prefix;
         } else {
             // prePrefix = Ender(secondColor), Prefix = Hero(color)
             return org.bukkit.ChatColor.getByChar(secondColor.asHexString()) + "§l" +  prePrefix +
                     ChatColor.of(color.asHexString()) + "§l" + prefix;
         }
-
     }
 
     public Component getPrefixForScoreboard() {
@@ -79,7 +77,6 @@ public enum Ranks {
                     .append(Component.text(prePrefix).color(secondColor).decorate(TextDecoration.BOLD))
                     .append(Component.text(prefix).color(color).decorate(TextDecoration.BOLD));
         }
-
     }
 
     public String getPermission() {
