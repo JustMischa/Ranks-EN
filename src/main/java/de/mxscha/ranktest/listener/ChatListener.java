@@ -48,7 +48,7 @@ public class ChatListener implements Listener {
 
                 // ping a player chat System
                 // Pattern = Woran wir suchen
-                Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]");
+                Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]*");
 
                 Matcher matcher = pattern.matcher("Test @Mxscha Test");
                 for(int i = 0; i < matcher.groupCount(); i++) {
