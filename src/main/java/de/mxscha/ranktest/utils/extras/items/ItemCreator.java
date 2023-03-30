@@ -1,5 +1,6 @@
 package de.mxscha.ranktest.utils.extras.items;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -72,8 +73,8 @@ public class ItemCreator {
     }
 
     // setting the Name of the Item
-    public ItemCreator setName(String name) {
-        this.itemMeta.setDisplayName(name);
+    public ItemCreator setName(Component name) {
+        this.itemMeta.displayName(name);
         return this;
     }
 

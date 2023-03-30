@@ -16,9 +16,9 @@ public class LevelUpCommand implements CommandExecutor {
         if (sender instanceof Player player) {
             ItemStack itemStack = player.getInventory().getItemInMainHand();
             if (!(itemStack.getType() == Material.AIR)) {
-                JobToolItem item = new JobToolItem(itemStack.getType(), itemStack.getItemMeta().getDisplayName());
-                item.setLevel(item.getLevel()+1);
-                player;
+                new JobToolItem(itemStack.getType(), itemStack.getItemMeta().displayName()).addLevel()
+                                .replacePlayers(player, player.getInventory().getHeldItemSlot());
+                player.sendMessage("§aDu hast dein Tool heraufgestuft.");
             } else
                 player.sendMessage("§cBitte nimm dein Tool in die Hand!");
         }

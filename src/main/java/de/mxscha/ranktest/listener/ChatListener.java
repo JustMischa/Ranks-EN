@@ -28,7 +28,7 @@ public class ChatListener implements Listener {
         Player player = event.getPlayer();
         new DefaultScoreboard(player).createScoreboard();
         // PlayerTablist.setTablist(player);
-        new JobToolItem(Material.GOLDEN_SWORD, "§cTest Tool").givePlayer(player);
+        //new JobToolItem(Material.GOLDEN_SWORD, "§cTest Tool").givePlayer(player);
     }
 
     @EventHandler
