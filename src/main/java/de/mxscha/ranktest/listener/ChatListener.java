@@ -3,6 +3,7 @@ package de.mxscha.ranktest.listener;
 import de.mxscha.ranktest.utils.DefaultScoreboard;
 import de.mxscha.ranktest.utils.PlayerTablist;
 import de.mxscha.ranktest.utils.extras.Ranks;
+import de.mxscha.ranktest.utils.extras.items.JobToolItem;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
@@ -11,6 +12,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +29,7 @@ public class ChatListener implements Listener {
         Player player = event.getPlayer();
         new DefaultScoreboard(player).createScoreboard();
         // PlayerTablist.setTablist(player);
+        new JobToolItem(Material.GOLDEN_SWORD, "§cTest Tool").givePlayer(player);
     }
 
     @EventHandler

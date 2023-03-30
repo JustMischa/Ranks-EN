@@ -1,5 +1,6 @@
 package de.mxscha.ranktest;
 
+import de.mxscha.ranktest.cmds.LevelUpCommand;
 import de.mxscha.ranktest.listener.ChatListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -11,6 +12,8 @@ public final class RankTest extends JavaPlugin {
     public void onEnable() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new ChatListener(), this);
+
+        getCommand("lvlup").setExecutor(new LevelUpCommand());
     }
 
     @Override
