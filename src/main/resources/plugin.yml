@@ -1,0 +1,5 @@
+name: RankTest
+version: '${project.version}'
+main: de.mxscha.ranktest.RankTest
+api-version: 1.19
+authors: [ Mxscha ]
