@@ -1,5 +1,6 @@
 package de.mxscha.ranktest.utils.extras;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -37,6 +38,14 @@ public abstract class ScoreboardBuilder {
         if (team == null)
             return;
         team.setPrefix(content);
+        showScore(score);
+    }
+
+    public void setScore(Component content, int score) {
+        Team team = getTeamByScore(score);
+        if (team == null)
+            return;
+        team.prefix(content);
         showScore(score);
     }
 

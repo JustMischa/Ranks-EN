@@ -40,12 +40,14 @@ public class DefaultScoreboard extends ScoreboardBuilder {
         for (Ranks ranks : Ranks.values()) {
             if (player.hasPermission(ranks.getPermission()) && !rankFound) {
                 rankFound = true;
-                setScore("  §8» " + ranks.getPrefix(), 8);
+                //setScore("  §8» " + ranks.getPrefix(), 8);
+                setScore(ranks.getPrefixForScoreboard(), 8);
             }
         }
 
         if(!rankFound) {
             setScore("  §8» " + Ranks.PLAYER.getPrefix(), 8);
+            setScore(Ranks.PLAYER.getPrefixForScoreboard(), 8);
         }
         setScore("§a", 7);
         setScore("§8● §7Dein Geld§8:", 6);

@@ -69,6 +69,19 @@ public enum Ranks {
 
     }
 
+    public Component getPrefixForScoreboard() {
+        if (secondColor == null || prePrefix == null) {
+            return Component.text("  §8» ")
+                    .append(Component.text(prefix).color(color).decorate(TextDecoration.BOLD));
+        } else {
+            // prePrefix = Ender(secondColor), Prefix = Hero(color)
+            return Component.text("  §8» ")
+                    .append(Component.text(prePrefix).color(secondColor).decorate(TextDecoration.BOLD))
+                    .append(Component.text(prefix).color(color).decorate(TextDecoration.BOLD));
+        }
+
+    }
+
     public String getPermission() {
         return permission;
     }
