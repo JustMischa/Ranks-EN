@@ -51,10 +51,8 @@ public class ChatListener implements Listener {
                 // ping a player chat System
 
                 // play the player a sound
+                // https://docs.advntr.dev/serializer/index.html
                 String msgString = PlainTextComponentSerializer.plainText().serialize(finalMsg);
-
-                TextReplacementConfig.Builder chatMessage = TextReplacementConfig.builder();
-
 
                 // Pattern = Woran wir suchen
                 Pattern pattern = Pattern.compile("@[a-zA-Z0-9_.]*");
@@ -63,6 +61,8 @@ public class ChatListener implements Listener {
                 while (matcher.find()) {
                     String currentMatch = matcher.group();
                     String currentPlayer = currentMatch.substring(1);
+
+                    TextReplacementConfig.Builder chatMessage = TextReplacementConfig.builder();
 
                     // replace the player name with the ping
                     chatMessage.match(currentMatch);
@@ -73,14 +73,15 @@ public class ChatListener implements Listener {
                         if (all.getName().equalsIgnoreCase(currentPlayer)) {
                             all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 1);
                         }
-
-                        // Hier wird die Nachricht an den Spieler gesendet
-                        all.sendMessage(ranks.getPrefixForChat()
-                                .append(name)
-                                .append(Component.text("§8: "))
-                                .append(finalMsg.replaceText(chatMessage.build())));
                     });
+                    finalMsg = finalMsg.replaceText(chatMessage.build());
                 }
+
+                // Hier wird die Nachricht an den Spieler gesendet
+                Bukkit.broadcast(ranks.getPrefixForChat()
+                        .append(name)
+                        .append(Component.text("§8: "))
+                        .append(finalMsg));
             }
         }
 
